@@ -1,23 +1,32 @@
-import React , {useState} from 'react';
+import React , {useState,useEffect} from 'react';
 
 const CardTodo =(props)=>{
-	// const [isupdate,setUpdate] = useState(false);
+	const [isupdate,setUpdate] = useState(false);
 	function handleDeleteTodo(id){
 		props.deleteTodo(id);
 	}
 
 	function handleUpdateTodo(todo){
-		// setUpdate(true);
+		setUpdate(true);
 		props.updateTodo(todo);
-		props.actionUpdate(true);
 	}
 
 	function cancelUpdate(){
 		props.updateTodo(null);
-		props.actionUpdate(false);
+		setUpdate(false);
 	}
+	// const isupdateparent = props.isupdate;
+	useEffect(()=>{
+    	if(!props.isupdate){
+		setUpdate(false);
+	}    
+ },[props.isupdate])
+	
+	function setDoneTodo(id){
+		props.onDoneTodo(id);
+	}
+	// console.log(props.isupdate	);
 
-	const isupdate_ = props.isupdate;
 
 	return (
 		<div className="card text-dark text-start my-3">
@@ -27,7 +36,7 @@ const CardTodo =(props)=>{
 		    <div className="row">
 		    	<div className="col">
 		    		<a href="#" className="btn btn-info" onClick={()=>handleUpdateTodo(props.todo)}>Ubah</a>
-		    		{isupdate_ ?
+		    		{isupdate ?
 		    			<a href="#" className="btn btn-default" onClick={()=>cancelUpdate()}>Cancel</a>
 		    			:
 		    			<a href="#" className="btn btn-danger" onClick={()=>handleDeleteTodo(props.todo.id)}>Hapus</a>
@@ -36,7 +45,7 @@ const CardTodo =(props)=>{
 		    	</div>
 		    	<div className="col">
 		    		{!props.todo.isdone &&
-		    		<a href="#" className="btn btn-primary">Selesai</a>
+		    		<a href="#" className="btn btn-primary" onClick={()=>setDoneTodo(props.todo.id)}>Selesai</a>
 		    		}
 		    	</div>
 		    </div>

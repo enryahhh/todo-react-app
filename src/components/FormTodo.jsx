@@ -11,14 +11,13 @@ function handleInputChange(event){
 		[name]:value
 	}
 	props.onChangeForm(todo);
-	console.log(todo)
 }
 
 const judul = props.todo.judul;
 const tanggal = props.todo.tanggal;
 const desc = props.todo.desc;
 const isdone = props.todo.isdone;
-// console.log(props.todo);
+console.log(props.isupdate);
 return (
 <div className="card text-dark text-start">
   <h5 className="card-header">Featured</h5>
@@ -26,7 +25,7 @@ return (
     <h5 className="card-title">Special title treatment</h5>
     <div className="row">
     	<div className="col">
-    			<form action="#" onSubmit={(e)=>props.addTodo(e)}>
+    			<form action="#" onSubmit={(e)=> (!props.isupdate) ? props.addTodo(e) : props.saveTodo(e)}>
     				<div className="mb-3">
 			  				<label htmlFor="exampleFormControlInput1" className="form-label">Judul</label>
 			  				<input type="text" className="form-control" name="judul" value={judul} onChange={(e)=>handleInputChange(e)} id="exampleFormControlInput1" placeholder="Beli Barang"></input>

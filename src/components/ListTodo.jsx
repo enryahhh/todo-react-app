@@ -2,11 +2,6 @@ import React , {useState} from 'react'
 import CardTodo from './CardTodo'
 
 const ListTodo = (props) => {
-	const [isupdate,setUpdate] = useState(false);
-
-	function actionUpdate(value){
-		setUpdate(value);
-	}
 
 	return (
 		<div className="card text-dark">
@@ -20,7 +15,13 @@ const ListTodo = (props) => {
 			<div className="tab-content" id="nav-tabContent">
 			  <div className="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 			  	{props.todos.map((todo)=>(
-			  			<CardTodo todo={todo} key={todo.id} actionUpdate={actionUpdate} isupdate={isupdate} deleteTodo={props.onDeleteTodo} updateTodo={props.onUpdateTodo}></CardTodo>
+			  			<CardTodo todo={todo} 
+			  			key={todo.id} 
+			  			actionUpdate={props.actionUpdate} 
+			  			isupdate={props.isupdate} 
+			  			deleteTodo={props.onDeleteTodo} 
+			  			updateTodo={props.onUpdateTodo}
+			  			onDoneTodo={props.onDoneTodo} ></CardTodo>
 			  		))}
 			  </div>
 			  <div className="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
